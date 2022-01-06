@@ -9,9 +9,9 @@ const tableBody = document.querySelector('.table__body');
 const overlay = document.querySelector('.overlay');
 overlay.classList.remove('active');
 
+let numb = 2;
 const createRow = (obj) => {
   const tr = document.createElement('tr');
-  let numb = 2;
   for (let item in obj) {
     if (item === 'id' || item === 'description' || item === 'discount' || item === 'images') {
       continue;
