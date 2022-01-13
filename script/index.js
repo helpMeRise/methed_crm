@@ -87,6 +87,19 @@ overlay.addEventListener('click', e => {
   }
 });
 
+tableBody.addEventListener('click', e => {
+  const target = e.target;
+  if (target.closest('.table__btn_del')) {
+    goods.forEach( (item, index) => {
+      if (target.closest('tr').querySelector('.table__cell-id').textContent === `id: ${item.id}`) {
+        goods.splice(index, 1);
+      }
+    })
+    target.closest('tr').remove();
+  }
+  console.log(goods);
+});
+
 const goods = [
   {
     "id": 1,
