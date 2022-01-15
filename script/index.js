@@ -6,9 +6,24 @@ const modalCheckbox = document.querySelector('.modal__checkbox');
 const modalInputDiscount = document.querySelector('.modal__input_discount');
 const tableBody = document.querySelector('.table__body');
 const addGoodBtn = document.querySelector('.panel__add-goods');
+const vendorCodeId = document.querySelector('.vendor-code__id');
+const modalCount = modalForm.querySelector('#count');
+const modalPrice = modalForm.querySelector('#price');
+const modalTotalPrice = modalForm.querySelector('.modal__total-price');
+const crmTotalPrice = document.querySelector('.crm__total-price');
 
 const overlay = document.querySelector('.overlay');
 overlay.classList.remove('active');
+
+
+const totalPrice = () => {
+  let totalPrice = 0;
+  tableBody.querySelectorAll('.table__cell_total-price').forEach(price => {
+    totalPrice += +((price.textContent).slice(1));
+  });
+  crmTotalPrice.textContent = `$ ${totalPrice}`;
+};
+
 
 let numb = 2;
 const createRow = (obj) => {
@@ -48,7 +63,7 @@ const createRow = (obj) => {
       price.textContent = `$${obj['price']}`;
 
       const totalPrice = document.createElement('td');
-      totalPrice.classList.add('table__cell');
+      totalPrice.classList.add('table__cell', 'table__cell_total-price');
       totalPrice.textContent = `$${obj['price'] * obj['count']}`;
 
       const buttons = document.createElement('td');
@@ -75,10 +90,13 @@ const renderGoods = (goods) => {
   goods.forEach( (item) => {
     createRow(item);
   })
+  totalPrice();
 }
 
 addGoodBtn.addEventListener('click', () => {
   overlay.classList.add('active');
+  vendorCodeId.textContent = Math.round(Math.random() * 1000000);
+  modalTotalPrice.textContent = `$ 0`;
 });
 
 overlay.addEventListener('click', e => {
@@ -96,9 +114,42 @@ tableBody.addEventListener('click', e => {
       }
     })
     target.closest('tr').remove();
+    totalPrice();
   }
   console.log(goods);
 });
+
+modalCheckbox.addEventListener('change', () => {
+  if (!modalCheckbox.checked) {
+    modalInputDiscount.setAttribute('disabled', '');
+    modalInputDiscount.value = '';
+  } else {
+    modalInputDiscount.removeAttribute('disabled')
+  }
+});
+
+modalForm.querySelectorAll('input').forEach(input => {
+  input.addEventListener('blur', () => {
+    modalTotalPrice.textContent = `$ ${modalPrice.value * modalCount.value - modalInputDiscount.value}`;
+  });
+});
+
+modalForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const target = e.target;
+  const formData = new FormData(target);
+
+  const newGood = Object.fromEntries(formData);
+  newGood.title = newGood.name;
+  delete newGood["name"];
+  newGood.id = vendorCodeId.textContent;
+  goods.push(newGood);
+  createRow(newGood);
+
+  target.reset();
+  overlay.classList.remove('active');
+  totalPrice();
+})
 
 const goods = [
   {
