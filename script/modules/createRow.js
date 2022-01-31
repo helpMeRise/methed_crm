@@ -45,6 +45,7 @@ export const createRow = (obj) => {
       buttons.classList.add('table__cell', 'table__cell_btn-wrapper');
       const btnPic = document.createElement('button');
       btnPic.classList.add('table__btn', 'table__btn_pic');
+      btnPic.dataset.pic = '../../img/test.jpg';
       const btnEdit = document.createElement('button');
       btnEdit.classList.add('table__btn', 'table__btn_edit');
       const btnDel = document.createElement('button');

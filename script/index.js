@@ -2,6 +2,7 @@
 import {renderGoods} from './modules/render.js';
 import modalActions from './modules/modal.js';
 import {removeRow} from './modules/removeRow.js';
+import {events} from './modules/events.js';
 
 const goods = [
   {
@@ -81,5 +82,6 @@ const init = (goods) => {
   renderGoods(goods);
   modalActions(goods);
   removeRow(goods);
+  events();
 };
 init(goods);
