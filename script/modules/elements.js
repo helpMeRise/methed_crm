@@ -11,4 +11,10 @@ export const modalPrice = modalForm.querySelector('#price');
 export const modalTotalPrice = modalForm.querySelector('.modal__total-price');
 export const crmTotalPrice = document.querySelector('.crm__total-price');
 export const overlay = document.querySelector('.overlay');
+export const modalFile = document.querySelector('.modal__file');
+export const preview = new Image();
+export const modalFieldset = document.querySelector('.modal__fieldset');
 
+export const text = document.createElement('p');
+text.className = 'text';
+modalFieldset.append(text);
