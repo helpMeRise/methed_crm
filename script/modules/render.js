@@ -14,19 +14,16 @@ export const totalPrice = () => {
   crmTotalPrice.textContent = `$ ${totalPrice}`;
 };
 
-export const goodNumberChange = () => {
-  const goods = tableBody.querySelectorAll('tr');
-  goods.forEach((item, index) => {
-    item.cells[0].textContent = `${index + 1}`;
-  });
-};
 
-export const renderGoods = (goods) => {
-  goods.forEach((item) => {
+export const renderGoods = (err, data) => {
+  if (err) {
+    console.warn(err);
+    return;
+  }
+  data.forEach((item) => {
     createRow(item);
   });
   overlay.classList.remove('active');
-  goodNumberChange();
   totalPrice();
 };
 

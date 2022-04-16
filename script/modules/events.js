@@ -1,5 +1,8 @@
 import {tableBody, modalFile,
-  preview, modalFieldset, text} from './elements.js';
+  preview, modalFieldset, text, searchInput} from './elements.js';
+import fetchRequest from './fetchRequest.js';
+import {renderGoods} from './render.js';
+
 
 export const events = () => {
   tableBody.addEventListener('click', e => {
@@ -21,10 +24,24 @@ export const events = () => {
         preview.remove();
       } else {
         preview.src = src;
+        preview.style.gridArea = 'file-add';
+        preview.style.maxWidth = '100%';
         text.remove();
         modalFieldset.append(preview);
         console.log(modalFile.files[0]);
       }
     }
+  });
+
+  searchInput.addEventListener('input', e => {
+    const search = () => Promise.all([
+      fetchRequest(`?search=${searchInput.value}`, {
+        callback: renderGoods,
+      })]);
+
+    setTimeout(() => {
+      tableBody.innerHTML = '';
+      search().then();
+    }, 300);
   });
 };
