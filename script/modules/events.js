@@ -17,7 +17,6 @@ export const events = () => {
   modalFile.addEventListener('change', () => {
     if (modalFile.files.length > 0) {
       const src = URL.createObjectURL(modalFile.files[0]);
-
       if (modalFile.files[0].size > 1000000) {
         modalFieldset.append(text);
         text.textContent = 'Изображение не должно превышать размер 1 Мб';
@@ -28,7 +27,6 @@ export const events = () => {
         preview.style.maxWidth = '100%';
         text.remove();
         modalFieldset.append(preview);
-        console.log(modalFile.files[0]);
       }
     }
   });

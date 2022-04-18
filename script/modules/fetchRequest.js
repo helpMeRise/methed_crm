@@ -1,6 +1,6 @@
-const URL = 'http://localhost:3000/api/goods';
+const URL = 'http://localhost:3000/';
 
-const fetchRequest = async (search, {
+const fetchRequest = async (prefix, {
   method = 'GET',
   callback,
   body,
@@ -14,7 +14,7 @@ const fetchRequest = async (search, {
     if (body) options.body = JSON.stringify(body);
     if (headers) options.headers = headers;
 
-    const response = await fetch(`${URL}${search}`, options);
+    const response = await fetch(`${URL}${prefix}`, options);
 
     if (response.ok) {
       const data = await response.json();

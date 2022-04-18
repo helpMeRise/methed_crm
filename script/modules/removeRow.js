@@ -15,7 +15,7 @@ export const removeRow = (goods) => {
           if (target.closest('tr').querySelectorAll('.table__cell')[0]
               .textContent === `${item.id}`) {
             goods.splice(index, 1);
-            fetchRequest(`/${item.id}`, {
+            fetchRequest(`api/goods/${item.id}`, {
               method: 'DELETE',
             });
           }

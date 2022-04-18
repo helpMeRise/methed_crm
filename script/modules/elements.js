@@ -11,6 +11,7 @@ export const modalPrice = modalForm.querySelector('#price');
 export const modalTotalPrice = modalForm.querySelector('.modal__total-price');
 export const crmTotalPrice = document.querySelector('.crm__total-price');
 export const overlay = document.querySelector('.overlay');
+export const overlayModal = document.querySelector('.overlay__modal');
 export const modalName = modalForm.querySelector('#name');
 export const modalCategory = modalForm.querySelector('#category');
 export const modalDescription = modalForm.querySelector('#description');
@@ -73,5 +74,15 @@ modalError.innerHTML = `
     color: #6E6893;
   "></p>
 `;
-
+export const list = document.createElement('datalist');
+list.id = 'category-list';
+list.innerHTML = `
+    <option value="Мобильный телефон"></option>
+    <option value="Игрушки"></option>
+    <option value="ТВ приставка"></option>
+    <option value="Кабеля"></option>
+    <option value="Умный дом"></option>
+`;
+document.body.append(list);
+modalCategory.setAttribute('list', 'category-list');
 

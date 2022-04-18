@@ -20,6 +20,7 @@ export const renderGoods = (err, data) => {
     console.warn(err);
     return;
   }
+  tableBody.innerHTML = '';
   data.forEach((item) => {
     createRow(item);
   });

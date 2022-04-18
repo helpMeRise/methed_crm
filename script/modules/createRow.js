@@ -1,6 +1,6 @@
 
 import {tableBody} from './elements.js';
-import {toBase64} from './toBase64.js';
+// import {toBase64} from './toBase64.js';
 
 export const createRow = (obj) => {
   const tr = document.createElement('tr');
@@ -43,7 +43,7 @@ export const createRow = (obj) => {
       buttons.classList.add('table__cell', 'table__cell_btn-wrapper');
       const btnPic = document.createElement('button');
       btnPic.classList.add('table__btn', 'table__btn_pic');
-      btnPic.dataset.pic = toBase64(`${obj['image']}`);
+      btnPic.dataset.pic = `http://localhost:3000/${obj['image']}`;
       btnPic.title = 'Добавить изображение';
       const btnEdit = document.createElement('button');
       btnEdit.classList.add('table__btn', 'table__btn_edit');
